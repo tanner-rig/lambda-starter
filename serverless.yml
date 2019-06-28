@@ -1,0 +1,41 @@
+service: lambda-starter
+
+plugins:
+  - serverless-webpack
+  - serverless-domain-manager
+  - serverless-plugin-warmup
+  - serverless-offline
+
+custom:
+  webpack:
+    webpackConfig: 'webpack.config.js'
+    includeModules: true
+    packager: 'npm'
+
+  customDomain:
+    certificateName: ${file(./serverless.env.yml):${self:provider.stage}.CERTIFICATE_NAME}
+    domainName: ${file(./serverless.env.yml):${self:provider.stage}.DOMAIN_NAME}
+    basePath: 'example'
+    stage: ${self:provider.stage}
+    createRoute53Record: true
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  stage: ${opt:stage, 'dev'}
+  region: ${file(./serverless.env.yml):${self:provider.stage}.AWS_REGION}
+
+  profile: ${file(./serverless.env.yml):${self:provider.stage}.SERVERLESS_ADMIN}
+  timeout: 30
+  environment:
+    REGION: ${self:provider.region}
+    STAGE: ${self:provider.stage}
+
+functions:
+  exampleFunction:
+    handler: functions/exampleFunction.main
+    events:
+      - http:
+          path: /
+          method: get
+          cors: true
