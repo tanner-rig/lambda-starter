@@ -9,4 +9,4 @@ You will need to create a `serverless.env.yml` file based on the `serverless.env
 
 - `npm run exampleFunction` runs that one function using the mock json file
 
-- `npm run deploy` to deploy your functions to aws
+- `npm run deploy` to deploy your functions to aws and create the endpoints in api-gateway
