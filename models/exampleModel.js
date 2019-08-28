@@ -14,6 +14,7 @@ const user = {
     return Object.keys(user);
   }
   
+  // removes password so it is not returned to the client
   export function getUserKeysWithoutSecrets() {
     const userKeys = getUserKeys();
   

@@ -30,6 +30,17 @@ provider:
   environment:
     REGION: ${self:provider.region}
     STAGE: ${self:provider.stage}
+    DYNAMO_EXAMPLE_TABLE: ${file(./serverless.env.yml):${self:provider.stage}.DYNAMO_EXAMPLE_TABLE}
+
+iamRoleStatements: # permissions for what each lambda function can do or interact with, the example below is giving our lambda functions permission to use the example table
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+      Resource: 'arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.DYNAMO_EXAMPLE_TABLE}*'
 
 functions:
   exampleFunction:
