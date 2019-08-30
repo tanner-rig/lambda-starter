@@ -3,8 +3,11 @@
   "version": "1.0.0",
   "description": "Starter repo for lambda functions using serverless",
   "scripts": {
-    "exampleFunction": "AWS_PROFILE=serverless-admin serverless invoke local --function exampleFunction --path mocks/exampleMock.json",
-    "deploy": "serverless deploy",
+    "exampleFunction": "AWS_PROFILE=serverless-admin serverless invoke local --function exampleFunction --path mocks/example.mock.json",
+    "createUserExample": "AWS_PROFILE=serverless-admin serverless invoke local --function createUserExample --path mocks/createUserExample.mock.json",
+    "getUserExample": "AWS_PROFILE=serverless-admin serverless invoke local --function getUserExample --path mocks/getUserExample.mock.json",
+    "deploy-dev": "serverless --stage dev deploy",
+    "deploy-prod": "serverless --stage prod deploy",
     "start": "serverless --stage dev offline start"
   },
   "author": "Tanner Rigby",
@@ -29,7 +32,10 @@
   "dependencies": {
     "aws-sdk": "^2.483.0",
     "babel-runtime": "^6.26.0",
-    "lodash": "^4.17.11",
+    "bcryptjs": "^2.4.3",
+    "jwt-simple": "^0.5.6",
+    "lodash": "^4.17.15",
+    "moment": "^2.24.0",
     "source-map-support": "^0.5.12",
     "uuid": "^3.3.3"
   }

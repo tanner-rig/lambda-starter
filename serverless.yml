@@ -3,8 +3,8 @@ service: lambda-starter
 plugins:
   - serverless-webpack
   - serverless-domain-manager
-  - serverless-plugin-warmup
-  - serverless-offline
+  # - serverless-plugin-warmup # keeps your lambdas "warm"
+  - serverless-offline # adds ability to run your service locally 
 
 custom:
   webpack:
@@ -31,16 +31,16 @@ provider:
     REGION: ${self:provider.region}
     STAGE: ${self:provider.stage}
     DYNAMO_EXAMPLE_TABLE: ${file(./serverless.env.yml):${self:provider.stage}.DYNAMO_EXAMPLE_TABLE}
-
-iamRoleStatements: # permissions for what each lambda function can do or interact with, the example below is giving our lambda functions permission to use the example table
-    - Effect: Allow
-      Action:
-        - dynamodb:Query
-        - dynamodb:Scan
-        - dynamodb:GetItem
-        - dynamodb:PutItem
-        - dynamodb:UpdateItem
-      Resource: 'arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.DYNAMO_EXAMPLE_TABLE}*'
+    JWT_SECRET: ${file(./serverless.env.yml):${self:provider.stage}.JWT_SECRET}
+  iamRoleStatements: # permissions for what each lambda function can do or interact with, the example below is giving our lambda functions permission to use the example table
+      - Effect: Allow
+        Action:
+          - dynamodb:Query
+          - dynamodb:Scan
+          - dynamodb:GetItem
+          - dynamodb:PutItem
+          - dynamodb:UpdateItem
+        Resource: 'arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.DYNAMO_EXAMPLE_TABLE}*'
 
 functions:
   exampleFunction:
@@ -48,5 +48,19 @@ functions:
     events:
       - http:
           path: /
+          method: get
+          cors: true
+  createUserExample:
+    handler: functions/createUserExample.main
+    events:
+      - http:
+          path: /user
+          method: put
+          cors: true
+  getUserExample:
+    handler: functions/getUserExample.main
+    events:
+      - http:
+          path: /user/{userId}
           method: get
           cors: true

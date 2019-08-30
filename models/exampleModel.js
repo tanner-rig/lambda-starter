@@ -2,7 +2,7 @@ import _ from 'lodash';
 
 const user = {
     userId: '',
-    email: '',
+    username: '',
     password: '',
     firstName: '',
     lastName: '',
@@ -10,7 +10,7 @@ const user = {
     updatedAt: '',
   };
 
-  function getUserKeys() {
+  export function getUserKeys() {
     return Object.keys(user);
   }
   

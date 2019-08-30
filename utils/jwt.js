@@ -6,12 +6,13 @@ export function getJWT(data, type) {
   // expiration date is 30 days from today
   const payload = {
     sub: data.username,
-    role: data.role,
     username: data.username || '',
     type,
     iat: Math.floor(Date.now() / 1000),
     exp: Math.floor((Date.now() / 1000) + (60 * 60 * 24 * 30))
   };
+
+  console.log('SECRET:', constants.JWT.SECRET)
 
   return jwt.encode(payload, constants.JWT.SECRET);
 }
