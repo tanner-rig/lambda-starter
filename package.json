@@ -6,8 +6,7 @@
     "exampleFunction": "AWS_PROFILE=serverless-admin serverless invoke local --function exampleFunction --path mocks/example.mock.json",
     "createUserExample": "AWS_PROFILE=serverless-admin serverless invoke local --function createUserExample --path mocks/createUserExample.mock.json",
     "getUserExample": "AWS_PROFILE=serverless-admin serverless invoke local --function getUserExample --path mocks/getUserExample.mock.json",
-    "deploy-dev": "serverless --stage dev deploy",
-    "deploy-prod": "serverless --stage prod deploy",
+    "deploy": "serverless --stage dev deploy",
     "start": "serverless --stage dev offline start",
     "create-domain": "serverless create-domain"
   },

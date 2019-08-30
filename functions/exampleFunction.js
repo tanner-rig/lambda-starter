@@ -1,10 +1,5 @@
-import { failure, serverFailure, success } from '../utils/response';
-import { isLambdaWarmer } from '../utils/warmer';
-
 export async function main(event) {
   return new Promise(async (resolve, reject) => {
-    if (isLambdaWarmer(event)) return resolve(success());
-
     const data = event.queryStringParameters;
 
     console.info('Event Received: ', data);
@@ -13,7 +8,7 @@ export async function main(event) {
     if (!data) {
       console.error('No data to work with!');
       return resolve({
-        statusCode: 500,
+        statusCode: 400,
         headers: {
           "Access-Control-Allow-Origin": "*",
           "Access-Control-Allow-Credentials": true
