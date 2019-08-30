@@ -8,7 +8,8 @@
     "getUserExample": "AWS_PROFILE=serverless-admin serverless invoke local --function getUserExample --path mocks/getUserExample.mock.json",
     "deploy-dev": "serverless --stage dev deploy",
     "deploy-prod": "serverless --stage prod deploy",
-    "start": "serverless --stage dev offline start"
+    "start": "serverless --stage dev offline start",
+    "create-domain": "serverless create-domain"
   },
   "author": "Tanner Rigby",
   "license": "ISC",
