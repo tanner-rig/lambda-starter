@@ -23,7 +23,7 @@
     "babel-preset-stage-0": "^6.24.1",
     "eslint": "^6.5.1",
     "serverless-domain-manager": "^3.3.0",
-    "serverless-offline": "^5.12.0",
+    "serverless-offline": "^12.0.4",
     "serverless-plugin-warmup": "^4.6.3-rc.1",
     "serverless-webpack": "^5.3.1",
     "webpack": "^4.41.2",
